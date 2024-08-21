@@ -4,11 +4,7 @@ import Router from "koa-router";
 import { Strategy } from "../../register";
 import { createUpstashRatelimiterMiddleware } from "../../middlewares/upstash-ratelimit";
 
-type CreateRatelimiterFunction = (config: any, { strapi }: {
-	strapi: Strapi;
-}) => (ctx: any, next: any) => Promise<void>
-
-export function createRouter(stapi: Strapi, strategies: Strategy[]) {
+export function createRouter(strapi: Strapi, strategies: Strategy[]) {
 	const router = new Router();
 
 	for (const strategy of strategies) {
