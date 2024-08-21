@@ -1,7 +1,7 @@
 import { Strapi } from "@strapi/strapi";
 
 import Router from "koa-router";
-import { Strategy } from "../../register";
+import { Strategy } from "../../types";
 import { createUpstashRatelimiterMiddleware } from "../../middlewares/upstash-ratelimit";
 
 export function createRouter(strapi: Strapi, strategies: Strategy[]) {

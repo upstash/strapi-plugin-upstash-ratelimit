@@ -1,6 +1,6 @@
 import { Strapi } from '@strapi/strapi';
-import { Algorithm, Ratelimit } from '@upstash/ratelimit';
-import { RatelimitConfig, Strategy } from '../register';
+import { Ratelimit } from '@upstash/ratelimit';
+import { RatelimitConfig, Strategy } from '../types';
 import { Redis } from '@upstash/redis';
 import { getStrategyKey } from '../utils/middlewares';
 5

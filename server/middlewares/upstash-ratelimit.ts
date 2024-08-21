@@ -1,5 +1,5 @@
 import type { Strapi } from "@strapi/strapi";
-import { RatelimitConfig, Strategy } from "../register";
+import { RatelimitConfig, Strategy } from '../types';
 import { Ratelimit } from "@upstash/ratelimit";
 import { getStrategyKey } from "../utils/middlewares";
 

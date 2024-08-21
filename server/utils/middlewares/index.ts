@@ -1,5 +1,5 @@
-import { Strategy } from "../../register";
+import { Strategy } from "../../types"
 
 export const getStrategyKey = (strategy: Strategy) => {
-	return `${strategy.methods.join("-")}.${strategy.path}`
+	return `${strategy.methods.join("/")}.${strategy.path}`
 }

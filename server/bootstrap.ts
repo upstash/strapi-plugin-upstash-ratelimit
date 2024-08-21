@@ -1,6 +1,6 @@
 import { Strapi } from '@strapi/strapi';
 import { createRouter } from './utils/middlewares/create-router';
-import { RatelimitConfig } from './register';
+import { RatelimitConfig } from './types';
 export default ({ strapi }: { strapi: Strapi }) => {
   // bootstrap phase
 
