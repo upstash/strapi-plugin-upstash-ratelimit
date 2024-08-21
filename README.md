@@ -37,7 +37,7 @@ Create a new redis database on [Upstash Console](https://console.upstash.com/). 
 
 Get the environment variables from [Upstash Console](https://console.upstash.com/), and set it to `.env` file as below:
 
-```
+```shell
 UPSTASH_REDIS_REST_TOKEN="<YOUR_TOKEN>"
 UPSTASH_REDIS_REST_URL="<YOUR_URL>"
 ```
@@ -46,29 +46,29 @@ UPSTASH_REDIS_REST_URL="<YOUR_URL>"
 
 In the `./config/plugins.ts` file, set the configurations for ratelimiter.
 
-```
+```typescript
 export default () => ({
-	'strapi-plugin-upstash-ratelimit': {
-		enabled: true,
-		resolve: './src/plugins/strapi-plugin-upstash-ratelimit',
-		config: {
-			enabled: true,
-			token: process.env.UPSTASH_REDIS_REST_TOKEN,
-			url: process.env.UPSTASH_REDIS_REST_URL,
-			strategy: [
-				{
-					methods: ["GET", "POST"],
-					path: "*",
-					limiter: {
-						algorithm: 'fixed-window',
-						tokens: 10,
-						window: '20s'
-					}
-				},
-			],
-			prefix: "@strapi"
-		}
-	},
+  "strapi-plugin-upstash-ratelimit": {
+    enabled: true,
+    resolve: "./src/plugins/strapi-plugin-upstash-ratelimit",
+    config: {
+      enabled: true,
+      token: process.env.UPSTASH_REDIS_REST_TOKEN,
+      url: process.env.UPSTASH_REDIS_REST_URL,
+      strategy: [
+        {
+          methods: ["GET", "POST"],
+          path: "*",
+          limiter: {
+            algorithm: "fixed-window",
+            tokens: 10,
+            window: "20s",
+          },
+        },
+      ],
+      prefix: "@strapi",
+    },
+  },
 });
 ```
 
