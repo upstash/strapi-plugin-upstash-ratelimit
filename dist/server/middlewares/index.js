@@ -1,9 +1,7 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const upstash_ratelimit_1 = __importDefault(require("./upstash-ratelimit"));
-exports.default = {
-    upstashRatelimit: upstash_ratelimit_1.default
+const upstash_ratelimit_1 = require("./upstash-ratelimit");
+const middlewares = {
+    createUpstashRatelimiterMiddleware: upstash_ratelimit_1.createUpstashRatelimiterMiddleware
 };
+exports.default = { middlewares };
