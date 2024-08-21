@@ -1,35 +1,28 @@
 import { Strapi } from '@strapi/strapi';
-import { Ratelimit } from '@upstash/ratelimit';
+import { Algorithm, Ratelimit } from '@upstash/ratelimit';
 import { RatelimitConfig } from '../register';
 import { Redis } from '@upstash/redis';
-// export default ({ strapi }: { strapi: Strapi }) => ({
-
-//   getRatelimitClient: () => {
-// const config: RatelimitConfig = strapi.config.get('plugin.strapi-plugin-upstash-ratelimit');
-
-// const { token, url, rate } = config
-
-// const ratelimitClient = new Ratelimit({
-//   redis: new Redis({
-//     url,
-//     token
-//   },
-//   ),
-//   limiter: Ratelimit.fixedWindow(rate.limit, '10s')
-// })
-
-// return ratelimitClient
-
-//   }
-// });
+5
 function createRatelimitStoreService({ strapi }: { strapi: Strapi }) {
-  let ratelimitClient
+  let client: Ratelimit
   let initialized = false;
   const config: RatelimitConfig = strapi.config.get('plugin.strapi-plugin-upstash-ratelimit');
 
   return {
     init() {
-      const { token, url, rate } = config
+      const { token, url, limiter, prefix, analytics } = config
+
+      if (!limiter) return
+
+
+      let limiterAlgorithm
+      if (config.limiter?.algorithm === 'fixed-window') {
+        limiterAlgorithm = Ratelimit.fixedWindow(limiter.tokens, limiter.window)
+      } if (config.limiter?.algorithm === 'sliding-window') {
+        limiterAlgorithm = Ratelimit.slidingWindow(limiter.tokens, limiter.window)
+      } else {
+        limiterAlgorithm = Ratelimit.fixedWindow(limiter.tokens, limiter.window)
+      }
 
       const ratelimitClient = new Ratelimit({
         redis: new Redis({
@@ -37,10 +30,13 @@ function createRatelimitStoreService({ strapi }: { strapi: Strapi }) {
           token
         },
         ),
-        limiter: Ratelimit.fixedWindow(rate.limit, '10s')
+        prefix,
+        analytics,
+        limiter: limiterAlgorithm,
       })
 
       initialized = true
+      client = ratelimitClient
       return ratelimitClient
     }
   }

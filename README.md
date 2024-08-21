@@ -1,4 +1,10 @@
-# Strapi plugin strapi-plugin-upstash-ratelimit
+<div align="center">
+<h1>Strapi Upstash Ratelimit Plugin</h1>
+	
+<p style="margin-top: 0;">Ratelimit your endpoints using globally distributed redis.</p>
+	
+</div>
 
-A quick description of strapi-plugin-upstash-ratelimit.
-# strapi-plugin-upstash-ratelimit
+## Table of Contents
+
+-
