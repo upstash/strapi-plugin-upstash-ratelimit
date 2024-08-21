@@ -20,13 +20,13 @@
 #### npm
 
 ```bash
-npm install --save @upstash/strapi-plugin-strapi-algolia
+npm install --save @upstash/strapi-plugin-upstash-ratelimit
 ```
 
 #### yarn
 
 ```bash
-yarn add @upstash/strapi-plugin-strapi-algolia
+yarn add @upstash/strapi-plugin-upstash-ratelimit
 ```
 
 ### Create database
