@@ -13,7 +13,9 @@ function createRatelimitStoreService({ strapi }: { strapi: Strapi }) {
         return clients.get(getStrategyKey(strategy))
       }
 
-      const { token, url, prefix, analytics } = config
+      let { token, url, prefix, analytics } = config
+
+      prefix = `${prefix}:${getStrategyKey(strategy)}`
 
       let limiterAlgorithm
       if (strategy.limiter?.algorithm === 'fixed-window') {
