@@ -1,7 +1,5 @@
-import { createUpstashRatelimiterMiddleware } from "./upstash-ratelimit"
+import upstashRatelimit from './upstash-ratelimit'
 
-const middlewares = {
-	createUpstashRatelimiterMiddleware
-}
-
-export default { middlewares }
+export default {
+	upstashRatelimit
+};

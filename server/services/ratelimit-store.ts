@@ -1,29 +1,27 @@
 import { Strapi } from '@strapi/strapi';
 import { Algorithm, Ratelimit } from '@upstash/ratelimit';
-import { RatelimitConfig, Strategy } from '../register';
+import { RatelimitConfig } from '../register';
 import { Redis } from '@upstash/redis';
-import { getStrategyKey } from '../utils/middlewares';
 5
 function createRatelimitStoreService({ strapi }: { strapi: Strapi }) {
+  let client: Ratelimit
+  let initialized = false;
   const config: RatelimitConfig = strapi.config.get('plugin.strapi-plugin-upstash-ratelimit');
-  const clients = new Map<string, Ratelimit>()
-  return {
-    addClient(strategy: Strategy) {
-      if (clients.has(getStrategyKey(strategy))) {
-        return clients.get(getStrategyKey(strategy))
-      }
 
-      const { token, url, prefix, analytics } = config
+  return {
+    init() {
+      const { token, url, limiter, prefix, analytics } = config
+
+      if (!limiter) return
+
 
       let limiterAlgorithm
-      if (strategy.limiter?.algorithm === 'fixed-window') {
-        limiterAlgorithm = Ratelimit.fixedWindow(strategy.limiter.tokens, strategy.limiter.window)
-      } if (strategy.limiter?.algorithm === 'sliding-window') {
-        limiterAlgorithm = Ratelimit.slidingWindow(strategy.limiter.tokens, strategy.limiter.window)
-      } if (strategy.limiter?.algorithm === 'token-bucket' && strategy.limiter.refillRate) {
-        limiterAlgorithm = Ratelimit.tokenBucket(strategy.limiter.refillRate, strategy.limiter.window, strategy.limiter.tokens)
+      if (config.limiter?.algorithm === 'fixed-window') {
+        limiterAlgorithm = Ratelimit.fixedWindow(limiter.tokens, limiter.window)
+      } if (config.limiter?.algorithm === 'sliding-window') {
+        limiterAlgorithm = Ratelimit.slidingWindow(limiter.tokens, limiter.window)
       } else {
-        limiterAlgorithm = Ratelimit.fixedWindow(strategy.limiter.tokens, strategy.limiter.window)
+        limiterAlgorithm = Ratelimit.fixedWindow(limiter.tokens, limiter.window)
       }
 
       const ratelimitClient = new Ratelimit({
@@ -37,15 +35,10 @@ function createRatelimitStoreService({ strapi }: { strapi: Strapi }) {
         limiter: limiterAlgorithm,
       })
 
-      clients.set(getStrategyKey(strategy), ratelimitClient)
+      initialized = true
+      client = ratelimitClient
       return ratelimitClient
-    },
-
-    clients() {
-      return clients
     }
-
-
   }
 }
 
