@@ -20,13 +20,13 @@
 #### npm
 
 ```bash
-npm install --save strapi-plugin-strapi-algolia
+npm install --save @upstash/strapi-plugin-strapi-algolia
 ```
 
 #### yarn
 
 ```bash
-yarn add strapi-plugin-strapi-algolia
+yarn add @upstash/strapi-plugin-strapi-algolia
 ```
 
 ### Create database
