@@ -10,10 +10,13 @@ type Limiter = {
 }
 
 export type Strategy = {
-	methods: ("GET" | "POST" | "PUT" | "DELETE" | "PATCH" | "HEAD" | "OPTIONS" | "TRACE" | "CONNECT" | "ALL")[]
+	methods: ("GET" | "POST" | "PUT" | "DELETE" | "PATCH" | "HEAD" | "OPTIONS" | "ALL")[]
 	algorithm: 'fixed-window' | 'sliding-window' | 'token-bucket'
+	identifierSource: "ip" | `header.${string}`
 	path: string;
 	limiter: Limiter
+	debug?: boolean
+
 }
 
 export type RatelimitConfig = {
