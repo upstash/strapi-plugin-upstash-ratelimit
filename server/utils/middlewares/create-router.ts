@@ -17,28 +17,36 @@ export function createRouter(strapi: Strapi, strategies: Strategy[]) {
 		for (const method of strategy.methods) {
 			switch (method) {
 				case "ALL":
-					strapi.log.debug(`[REGISTER] ALL ${strategy.path}`)
+					strapi.log.info(`[REGISTER] RATELIMIT ALL ${strategy.path}`)
 					router.all(strategy.path, ratelimiterMiddleware)
 					break;
 				case "GET":
-					strapi.log.debug(`[REGISTER] GET ${strategy.path}`)
+					strapi.log.info(`[REGISTER] RATELIMIT GET ${strategy.path}`)
 					router.get(strategy.path, ratelimiterMiddleware)
 					break;
 				case "POST":
-					strapi.log.debug(`[REGISTER] POST ${strategy.path}`)
+					strapi.log.info(`[REGISTER] RATELIMIT POST ${strategy.path}`)
 					router.post(strategy.path, ratelimiterMiddleware)
 					break;
 				case "PUT":
-					strapi.log.debug(`[REGISTER] PUT ${strategy.path}`)
+					strapi.log.info(`[REGISTER] RATELIMIT PUT ${strategy.path}`)
 					router.put(strategy.path, ratelimiterMiddleware)
 					break;
 				case "DELETE":
-					strapi.log.debug(`[REGISTER] DELETE ${strategy.path}`)
+					strapi.log.info(`[REGISTER] RATELIMIT DELETE ${strategy.path}`)
 					router.delete(strategy.path, ratelimiterMiddleware)
 					break;
 				case "PATCH":
-					strapi.log.debug(`[REGISTER] PATCH ${strategy.path}`)
+					strapi.log.info(`[REGISTER] RATELIMIT PATCH ${strategy.path}`)
 					router.patch(strategy.path, ratelimiterMiddleware)
+					break;
+				case "HEAD":
+					strapi.log.info(`[REGISTER] RATELIMIT HEAD ${strategy.path}`)
+					router.head(strategy.path, ratelimiterMiddleware)
+					break;
+				case "OPTIONS":
+					strapi.log.info(`[REGISTER] RATELIMIT OPTIONS ${strategy.path}`)
+					router.options(strategy.path, ratelimiterMiddleware)
 					break;
 			}
 		}

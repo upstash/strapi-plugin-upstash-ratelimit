@@ -3,7 +3,6 @@ import { createRouter } from './utils/middlewares/create-router';
 import { RatelimitConfig } from './types';
 export default ({ strapi }: { strapi: Strapi }) => {
   // bootstrap phase
-
   const config: RatelimitConfig = strapi.config.get('plugin.strapi-plugin-upstash-ratelimit');
   const router = createRouter(strapi, config.strategy)
 
