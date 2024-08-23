@@ -16,11 +16,11 @@ export type Strategy = {
 	path: string;
 	limiter: Limiter
 	debug?: boolean
+	disabled?: boolean
 
 }
 
 export type RatelimitConfig = {
-	enabled: boolean;
 	url: string;
 	token: string
 	analytics: boolean;
