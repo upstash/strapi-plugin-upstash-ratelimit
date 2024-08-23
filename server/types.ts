@@ -16,7 +16,7 @@ export type Strategy = {
 	path: string;
 	limiter: Limiter
 	debug?: boolean
-
+	disabled?: boolean
 }
 
 export type RatelimitConfig = {
