@@ -4,16 +4,12 @@ import { Ratelimit } from "@upstash/ratelimit";
 import { getStrategyKey, parseRatelimitIdentifier } from "../utils/middlewares";
 import { Context } from 'koa'
 
-
-
-
 export function createUpstashRatelimiterMiddleware(strategy: Strategy, { strapi }: { strapi: Strapi }) {
-	const ratelimitConfig: RatelimitConfig = strapi.config.get('plugin.strapi-plugin-upstash-ratelimit');
 	const store = strapi.plugin('strapi-plugin-upstash-ratelimit').service('ratelimitStore')
 	const client: Ratelimit = store.addClient(strategy)
 
 	return async function limit(ctx: Context, next) {
-		if (ratelimitConfig.enabled) {
+		if (!strategy.disabled) {
 			let identifier: string
 			if (strategy.identifierSource === 'ip') {
 				identifier = ctx.ip
