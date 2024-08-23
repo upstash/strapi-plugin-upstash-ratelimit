@@ -7,6 +7,13 @@
     "description": "Description of strapi-plugin-upstash-ratelimit plugin",
     "kind": "plugin"
   },
+  "files": [
+    "dist/",
+    "server/",
+    "admin/",
+    "strapi-admin.js",
+    "strapi-server.js"
+  ],
   "dependencies": {
     "@koa/router": "^13.0.0",
     "@strapi/design-system": "^1.6.3",
@@ -36,11 +43,13 @@
     "styled-components": "^5.2.1"
   },
   "author": {
-    "name": "A Strapi developer"
+    "name": "Fahreddin Ozcan",
+    "url": "https://github.com/fahreddinozcan"
   },
   "maintainers": [
     {
-      "name": "A Strapi developer"
+      "name": "Fahreddin Ozcan",
+      "url": "https://github.com/fahreddinozcan"
     }
   ],
   "engines": {
