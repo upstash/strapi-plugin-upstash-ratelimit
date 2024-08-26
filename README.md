@@ -74,7 +74,7 @@ export default () => ({
 
 ## Documentation
 
-See [the documentation](https://upstash.com/docs/redis) for more information details about this package.
+See [the documentation](https://upstash.com/docs/redis/integrations/ratelimit/strapi/getting-started) for more information details about this package.
 
 ## License
 
