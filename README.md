@@ -9,9 +9,11 @@
 
 </div>
 
-> [!NOTE]  
-> **This project is in the Experimental Stage.**
-> We declare this project experimental to set clear expectations for your usage. There could be known or unknown bugs, the API could evolve, or the project could be discontinued if it does not find community adoption. While we cannot provide professional support for experimental projects, we’d be happy to hear from you if you see value in this project!
+## Features
+
+This plugin provides a way to apply **Route based ratelimiting** to prevent the abuse targeting your endpoints. It uses HTTP and Upstash Redis based ratelimiting under the hood.
+
+The ratelimiting data is stored on a Redis database. You can set a strategy to define which algorithms or which rates to use per endpoint. You can also enable logging, to see the
 
 ## Quickstart
 
@@ -50,9 +52,7 @@ In the `./config/plugins.ts` file, set the configurations for ratelimiter.
 export default () => ({
   "strapi-plugin-upstash-ratelimit": {
     enabled: true,
-    resolve: "./src/plugins/strapi-plugin-upstash-ratelimit",
     config: {
-      enabled: true,
       token: process.env.UPSTASH_REDIS_REST_TOKEN,
       url: process.env.UPSTASH_REDIS_REST_URL,
       strategy: [
@@ -75,3 +75,7 @@ export default () => ({
 ## Documentation
 
 See [the documentation](https://upstash.com/docs/redis) for more information details about this package.
+
+## License
+
+See the

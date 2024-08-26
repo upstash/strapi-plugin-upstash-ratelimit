@@ -40,16 +40,19 @@
     "react": "^17.0.0 || ^18.0.0",
     "react-dom": "^17.0.0 || ^18.0.0",
     "react-router-dom": "^5.2.0",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "@strapi/strapi": "^4.4.0"
   },
   "author": {
     "name": "Fahreddin Ozcan",
-    "url": "https://github.com/fahreddinozcan"
+    "url": "https://github.com/fahreddinozcan",
+    "email": "fahreddin@upstash.com"
   },
   "maintainers": [
     {
       "name": "Fahreddin Ozcan",
-      "url": "https://github.com/fahreddinozcan"
+      "url": "https://github.com/fahreddinozcan",
+      "email": "fahreddin@upstash.com"
     }
   ],
   "engines": {
